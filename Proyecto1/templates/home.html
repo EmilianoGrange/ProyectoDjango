@@ -7,5 +7,15 @@
 </head>
 <body>
     <h1>Template de html para el home</h1>
+
+    <p style="color: red">Mi nombre es {{name}}</p>
+    <p style="color: green">Mi apellido es {{last_name}}</p>
+
+
+    <ul>
+        {% for n in list %}
+        <li>{{n}}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

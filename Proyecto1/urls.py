@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from Proyecto1.views import saludo, dia_de_hoy, saludo_nombre, home_template
 
+# endpoints...
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludo/', saludo),

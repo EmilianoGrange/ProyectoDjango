@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.template import Template, Context, loader
+from django.template import loader
 from datetime import datetime as d
 
 def saludo(req):
@@ -15,16 +15,6 @@ def saludo_nombre(req, name):
 def home_template(req):
 
     user = {"name": "Emiliano", "last_name": "Grange", "list": [1,2,3,4,5]}
-
-    #miHtml = open('Proyecto1/templates/home.html')
-
-    #plantilla = Template(miHtml.read())
-
-    #miHtml.close()
-
-    #context = Context(user)
-
-    #doc = plantilla.render(context)
 
     plantilla = loader.get_template('home.html')
 

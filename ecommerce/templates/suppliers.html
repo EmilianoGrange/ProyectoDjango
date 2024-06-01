@@ -27,6 +27,14 @@
 
 
         {% block dinamicContent %}
+
+        <form action="{% url 'suppliers' %}" method="post">{% csrf_token %}
+            <div class="form-group">
+                {{supp_form.as_p}}
+
+                <input class="btn btn-primary" type="submit" value="Nuevo Proveedor"/>
+            </div>
+        </form>
     
         {% endblock dinamicContent %}
 

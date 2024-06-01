@@ -26,6 +26,14 @@
         <!-- Section-->
 
         {% block dinamicContent %}
+
+        <form action="{% url 'employees' %}" method="post">{% csrf_token %}
+            <div class="form-group">
+                {{emp_form.as_p}}
+
+                <input class="btn btn-primary" type="submit" value="Nuevo Empleado"/>
+            </div>
+        </form>
     
         {% endblock dinamicContent %}
 

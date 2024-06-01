@@ -16,7 +16,7 @@ class ProductForm(forms.Form):
 class EmployeeForm(forms.Form):
     name = forms.CharField()
     last_name = forms.CharField()
-    #birthday = forms.DateField()
+    birthday = forms.DateField()
     position = forms.CharField()
     salary = forms.DecimalField()
     start_date = forms.DateField()

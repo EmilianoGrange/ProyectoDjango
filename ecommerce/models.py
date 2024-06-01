@@ -34,7 +34,7 @@ class Product(models.Model):
     #supplier = models.ManyToManyField(Supplier)
 
     def __str__(self):
-        return f'{self.title} - {self.category} - {self.price}'
+        return f'{self.title} - {self.category} - ${self.price}'
     
     #class Meta():
     #    verbose_name = 'Producto'
@@ -45,7 +45,7 @@ class Product(models.Model):
 class Employee(models.Model):
     name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    #birthday = models.DateField()
+    birthday = models.DateField()
     position = models.CharField(max_length=50)
     salary = models.DecimalField(max_digits=9, decimal_places=2)
     start_date = models.DateField()

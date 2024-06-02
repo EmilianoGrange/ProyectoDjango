@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Supplier, Product, Employee
 from .forms import SupplierForm, ProductForm, EmployeeForm

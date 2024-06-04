@@ -16,13 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Proyecto1.views import saludo, dia_de_hoy, saludo_nombre, home_template
+from Proyecto1.views import dia_de_hoy, saludo_nombre
 
 # endpoints...
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ecommerce/', include('ecommerce.urls')), #ruteo
-    path('saludo/', saludo),
     path('fecha/', dia_de_hoy),
     path('saludar/<name>', saludo_nombre),
 ]

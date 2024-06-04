@@ -1,8 +1,6 @@
-import os
-from django.conf import settings
+#import os
+#from django.conf import settings
 from django.db import models
-
-# Create your models here.
 
 #def images_path():
 #    return os.path.join(settings.LOCAL_FILE_DIR, "images")

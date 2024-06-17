@@ -30,6 +30,21 @@ def search_product(req):
 
     return render(req, 'search_product.html', {})
 
+def del_product(req, id):
+
+    if req.method == 'POST':
+        product = Product.objects.get(id=id)
+        product.delete()
+
+    prod_form = ProductForm()
+    products = Product.objects.all()
+    return render(req, 'products.html', {'prod_form': prod_form, 'products': products})
+
+def detailed_product(req, id):
+    product = Product.objects.get(id=id)
+
+    return render(req, 'detail_product.html', {'product': product})
+
 def show_employees(req):
 
     if req.method == 'POST':
@@ -39,9 +54,9 @@ def show_employees(req):
             new_employee = Employee(**data)
             new_employee.save()
 
-    emp_form = EmployeeForm()
+    empl_form = EmployeeForm()
     employees = Employee.objects.all()
-    return render(req, 'employees.html', {'emp_form': emp_form, 'employees': employees})
+    return render(req, 'employees.html', {'empl_form': empl_form, 'employees': employees})
 
 def show_suppliers(req):
 

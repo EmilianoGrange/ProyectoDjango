@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Detalle Producto - Ecommerce</title>
+        <title>Detalle Proveedor - Ecommerce</title>
         <link rel="icon" type="image/x-icon" href="{% static '/assets/favicon.ico' %}"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="{% static '/css/styles.css' %}" rel="stylesheet" />
@@ -26,17 +26,15 @@
             <section class="py-5 container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <div class="col mb-5">
-                            <div class="card h-100">
-                                <!-- Product image-->
-                                <img class="card-img-top" src="{% static 'imgs/potato.jpg' %}" alt={{product.title}} />
-                                <!-- Product details-->
-                                <div class="card-body p-4 text-center">
-                                    <!-- Product name-->
-                                    <h3 class="fw-bolder">{{product.title}}</h3>
-                                    <!-- Product price-->
-                                    ${{product.price}}
-                                </div>
+                        <div class="card h-100">
+                            <div class="card-head p-4 text-center bg-dark text-light">Proveedor</div>
+                            <div class="card-body p-4 text-center">
+                                <!-- Name -->
+                                <h3 class="fw-bolder">{{supplier.last_name}}, {{supplier.name}}</h3>
+                                <!-- Contact mail address -->
+                                <h4>{{supplier.email}}</h4>
                             </div>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -25,6 +25,14 @@
 
         {% block dinamicContent %}
 
+            {% comment %} {% if admin %} {% endcomment %}
+                <a class="btn btn-primary" href="{% url 'createSupplier' %}">Agregar Proveedor</a>
+            {% comment %} {% endif %} {% endcomment %}
+
+            {% if supplier %}
+                <h3>{{supplier.last_name}}, {{supplier.name}} eliminado!</h3>
+            {% endif %}
+
             <section class="py-5">
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 d-flex justify-content-around justify-content-center">
@@ -40,28 +48,14 @@
                                     </div>
                                     <!-- Details -->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto mb-1" href="#">Otros datos</a></div>
-                                        <div class="text-center"><button class="btn btn-danger mt-auto mb-1" href="#">Eliminar</button></div>
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'detailedSupplier' supp.id %}">Otros datos</a></div>
+                                        <form action="{% url 'deleteSupplier' supp.id %}" method="post" class="text-center">{% csrf_token %}
+                                            <button class="btn btn-del btn-danger mt-auto mb-1" id={{supp.id}} type="submit">Eliminar</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-5 container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <h4>Agendar Proveedor</h4>
-
-                        <form action="{% url 'suppliers' %}" method="post">{% csrf_token %}
-                            <div class="form-group">
-                                {{supp_form.as_p}}
-
-                                <input class="btn btn-primary" type="submit" value="Nuevo Proveedor"/>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </section>

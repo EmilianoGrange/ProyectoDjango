@@ -25,7 +25,7 @@
     <!-- Section-->
 
     {% block dinamicContent %}
-    {% comment %} <section class="py-5">
+        {% comment %} <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <div class="col mb-5">
@@ -238,50 +238,46 @@
                 </div>
             </div>
         </div>
-    </section> {% endcomment %}
+        </section> {% endcomment %}
 
-    <section class="py-5">
-        <div class=" container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 d-flex justify-content-around justify-content-center">
-                {% for prod in products %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{% static 'imgs/potato.jpg' %}" alt={{prod.title}} />
-                            <!-- Product details-->
-                            <div class="card-body p-4 text-center">
-                                <!-- Product name-->
-                                <h3 class="fw-bolder">{{prod.title}}</h3>
-                                <!-- Product price-->
-                                ${{prod.price}}
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'detailedProduct' prod.id %}">Ver detalle</a></div>
-                                <div class="text-center"><button class="btn btn-del btn-danger mt-auto mb-1" id={{prod.id}} href="#">Eliminar</button></div>
+        {% comment %} {% if admin %} {% endcomment %}
+            <a class="btn btn-primary" href="{% url 'createProduct' %}">Agregar Producto</a>
+        {% comment %} {% endif %} {% endcomment %}
+
+        
+        {% if product %}
+            <h3>{{product.title}} eliminado!</h3>
+        {% endif %}
+            
+
+        <section class="py-5">
+            <div class=" container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 d-flex justify-content-around justify-content-center">
+                    {% for prod in products %}
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" src="{% static 'imgs/potato.jpg' %}" alt={{prod.title}} />
+                                <!-- Product details-->
+                                <div class="card-body p-4 text-center">
+                                    <!-- Product name-->
+                                    <h3 class="fw-bolder">{{prod.title}}</h3>
+                                    <!-- Product price-->
+                                    ${{prod.price}}
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'detailedProduct' prod.id %}">Ver detalle</a></div>
+                                    <form action="{% url 'deleteProduct' prod.id %}" method="post" class="text-center">{% csrf_token %}
+                                        <button class="btn btn-del btn-danger mt-auto mb-1" id={{prod.id}} type="submit">Eliminar</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </section>
-
-    <section class="py-5 container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
-                <h4>Agregar Producto</h4>
-
-                <form action="{% url 'products' %}" method="post">{% csrf_token %}
-                    <div class="form-group">
-                        {{prod_form.as_p}}
-
-                        <input class="btn btn-primary" type="submit" value="Agregar Producto" />
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
+        </section>
 
     {% endblock dinamicContent %}
 

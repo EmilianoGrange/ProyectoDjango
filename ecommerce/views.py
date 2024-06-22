@@ -8,7 +8,16 @@ def home_template(req):
     return render(req, 'home.html', {})
 
 def show_products(req):
-        
+
+    products = Product.objects.all()
+    return render(req, 'products.html', {'products': products})
+
+def detailed_product(req, id):
+    product = Product.objects.get(id=id)
+
+    return render(req, 'detail_product.html', {'product': product})
+
+def create_product(req):
     if req.method == 'POST':
         prod_form = ProductForm(req.POST)
         if prod_form.is_valid():
@@ -16,9 +25,10 @@ def show_products(req):
             new_product = Product(**data)
             new_product.save()
 
+            return render(req, 'create_product.html', {'message': 'Producto creado con exito'})
+
     prod_form = ProductForm()
-    products = Product.objects.all()
-    return render(req, 'products.html', {'prod_form': prod_form, 'products': products})
+    return render(req, 'create_product.html', {'prod_form': prod_form})
 
 def search_product(req):
     if req.GET.get('product'):
@@ -36,16 +46,20 @@ def del_product(req, id):
         product = Product.objects.get(id=id)
         product.delete()
 
-    prod_form = ProductForm()
-    products = Product.objects.all()
-    return render(req, 'products.html', {'prod_form': prod_form, 'products': products})
-
-def detailed_product(req, id):
-    product = Product.objects.get(id=id)
-
-    return render(req, 'detail_product.html', {'product': product})
+        products = Product.objects.all()
+        return render(req, 'products.html', {'products': products, 'product': product})
 
 def show_employees(req):
+
+    employees = Employee.objects.all()
+    return render(req, 'employees.html', {'employees': employees})
+
+def detailed_employee(req, id):
+    employee = Employee.objects.get(id=id)
+
+    return render(req, 'detail_employee.html', {'employee': employee})
+
+def create_employee(req):
 
     if req.method == 'POST':
         emp_form = EmployeeForm(req.POST)
@@ -54,11 +68,31 @@ def show_employees(req):
             new_employee = Employee(**data)
             new_employee.save()
 
+            return render(req, 'create_employee.html', {'message': 'Empleado creado con exito'})
+
     empl_form = EmployeeForm()
-    employees = Employee.objects.all()
-    return render(req, 'employees.html', {'empl_form': empl_form, 'employees': employees})
+    return render(req, 'create_employee.html', {'empl_form': empl_form})
+
+def del_employee(req, id):
+
+    if req.method == 'POST':
+        employee = Employee.objects.get(id=id)
+        employee.delete()
+
+        employees = Employee.objects.all()
+        return render(req, 'employees.html', {'employees': employees, 'employee': employee})
 
 def show_suppliers(req):
+
+    suppliers = Supplier.objects.all()
+    return render(req, 'suppliers.html', {'suppliers': suppliers})
+
+def detailed_supplier(req, id):
+    supplier = Supplier.objects.get(id=id)
+
+    return render(req, 'detail_supplier.html', {'supplier': supplier})
+
+def create_supplier(req):
 
     if req.method == 'POST':
         sup_form = SupplierForm(req.POST)
@@ -67,6 +101,16 @@ def show_suppliers(req):
             new_supplier = Supplier(**data)
             new_supplier.save()
 
+            return render(req, 'create_supplier.html', {'message': 'Proveedor creado con exito'})
+
     supp_form = SupplierForm()
-    suppliers = Supplier.objects.all()
-    return render(req, 'suppliers.html', {'supp_form': supp_form, 'suppliers': suppliers})
+    return render(req, 'create_supplier.html', {'supp_form': supp_form})
+
+def del_supplier(req, id):
+
+    if req.method == 'POST':
+        supplier = Supplier.objects.get(id=id)
+        supplier.delete()
+
+        suppliers = Supplier.objects.all()
+        return render(req, 'suppliers.html', {'suppliers': suppliers, 'supplier': supplier})

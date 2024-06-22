@@ -25,6 +25,14 @@
 
         {% block dinamicContent %}
 
+            {% comment %} {% if admin %} {% endcomment %}
+                <a class="btn btn-primary" href="{% url 'createEmployee' %}">Agregar Empleado</a>
+            {% comment %} {% endif %} {% endcomment %}
+
+            {% if employee %}
+                <h3>{{employee.last_name}}, {{employee.name}} eliminado!</h3>
+            {% endif %}
+
             <section class="py-5">
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 d-flex justify-content-around justify-content-center">
@@ -40,9 +48,11 @@
                                     </div>
                                     <!-- Details -->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto mb-1" href="#">Otros datos</a></div>
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'detailedEmployee' emp.id %}">Otros datos</a></div>
                                         {% comment %} {% if admin %} {% endcomment %}
-                                            <div class="text-center"><button class="btn btn-danger mt-auto mb-1" href="#">Eliminar</button></div>
+                                            <form action="{% url 'deleteEmployee' emp.id %}" method="post" class="text-center">{% csrf_token %}
+                                                <button class="btn btn-del btn-danger mt-auto mb-1" id={{emp.id}} type="submit">Eliminar</button>
+                                            </form>
                                         {% comment %} {% endif %} {% endcomment %}
                                     </div>
                                 </div>
@@ -51,24 +61,6 @@
                     </div>
                 </div>
             </section>
-
-            {% comment %} {% if admin %} {% endcomment %}
-            <section class="py-5 container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <h4>Registrar Empleado</h4>
-
-                        <form action="{% url 'employees' %}" method="post">{% csrf_token %}
-                            <div class="form-group">
-                                {{empl_form.as_p}}
-
-                                <input class="btn btn-primary" type="submit" value="Nuevo Empleado"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-            {% comment %} {% endif %} {% endcomment %}
 
         {% endblock dinamicContent %}
 

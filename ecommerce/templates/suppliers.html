@@ -29,6 +29,8 @@
                 <a class="btn btn-primary" href="{% url 'createSupplier' %}">Agregar Proveedor</a>
             {% comment %} {% endif %} {% endcomment %}
 
+            <a class="btn btn-secondary" href="{% url 'searchSupplier' %}">Busqueda 🔎</a>
+
             {% if supplier %}
                 <h3>{{supplier.last_name}}, {{supplier.name}} eliminado!</h3>
             {% endif %}

@@ -244,6 +244,7 @@
             <a class="btn btn-primary" href="{% url 'createProduct' %}">Agregar Producto</a>
         {% comment %} {% endif %} {% endcomment %}
 
+        <a class="btn btn-secondary" href="{% url 'searchProduct' %}">Busqueda 🔎</a>
         
         {% if product %}
             <h3>{{product.title}} eliminado!</h3>

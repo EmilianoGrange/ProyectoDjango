@@ -11,9 +11,11 @@ urlpatterns = [
     path('employees/', show_employees, name='employees'),
     path('detail_employee/<int:id>', detailed_employee, name='detailedEmployee'),
     path('create_employee/', create_employee, name='createEmployee'),
+    path('search_employee/', search_employee, name='searchEmployee'),
     path('employees/<int:id>', del_employee, name='deleteEmployee'),
     path('suppliers/', show_suppliers, name='suppliers'),
     path('detail_supplier/<int:id>', detailed_supplier, name='detailedSupplier'),
     path('create_supplier/', create_supplier, name='createSupplier'),
+    path('search_supplier/', search_supplier, name='searchSupplier'),
     path('suppliers/<int:id>', del_supplier, name='deleteSupplier')
 ]

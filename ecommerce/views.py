@@ -73,6 +73,16 @@ def create_employee(req):
     empl_form = EmployeeForm()
     return render(req, 'create_employee.html', {'empl_form': empl_form})
 
+def search_employee(req):
+    if req.GET.get('employee'):
+        try:
+            employee = Employee.objects.get(last_name__icontains = (req.GET.get('employee')).capitalize())
+            return render(req, 'search_employee.html', {'employee': employee})
+        except:
+            return render(req, 'search_employee.html', {'employee': 'No se encontraron coincidencias'})
+
+    return render(req, 'search_employee.html', {})
+
 def del_employee(req, id):
 
     if req.method == 'POST':
@@ -105,6 +115,16 @@ def create_supplier(req):
 
     supp_form = SupplierForm()
     return render(req, 'create_supplier.html', {'supp_form': supp_form})
+
+def search_supplier(req):
+    if req.GET.get('supplier'):
+        try:
+            supplier = Supplier.objects.get(last_name__icontains = (req.GET.get('supplier')).capitalize())
+            return render(req, 'search_supplier.html', {'supplier': supplier})
+        except:
+            return render(req, 'search_supplier.html', {'supplier': 'No se encontraron coincidencias'})
+
+    return render(req, 'search_supplier.html', {})
 
 def del_supplier(req, id):
 

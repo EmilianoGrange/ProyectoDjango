@@ -29,6 +29,8 @@
                 <a class="btn btn-primary" href="{% url 'createEmployee' %}">Agregar Empleado</a>
             {% comment %} {% endif %} {% endcomment %}
 
+            <a class="btn btn-secondary" href="{% url 'searchEmployee' %}">Busqueda 🔎</a>
+
             {% if employee %}
                 <h3>{{employee.last_name}}, {{employee.name}} eliminado!</h3>
             {% endif %}

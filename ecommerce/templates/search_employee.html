@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Busqueda Producto - Ecommerce</title>
+        <title>Busqueda Colaborador - Ecommerce</title>
         <link rel="icon" type="image/x-icon" href="{% static '/assets/favicon.ico' %}"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="{% static '/css/styles.css' %}" rel="stylesheet" />
@@ -25,18 +25,18 @@
 
         {% block dinamicContent %}
 
-            <form action="{% url 'searchProduct' %}" method="get">
+            <form action="{% url 'searchEmployee' %}" method="get">
                 <div class="form-group">
-                    Producto: <input type="text" name="product" placeholder="Buscar..." required/>
+                    Empleado: <input type="text" name="employee" placeholder="Apellido..." required/>
 
                     <input class="btn btn-primary" type="submit" value="Buscar"/>
                 </div>
             </form>
 
-            {% if product != None %}
-                <p>{{product}} 
-                    {% if product.id %}
-                        <a class="btn btn-info" href="{% url 'detailedProduct' product.id %}">Ir</a>
+            {% if employee != None %}
+                <p>{{employee}} 
+                    {% if employee.id %}
+                        <a class="btn btn-info" href="{% url 'detailedEmployee' employee.id %}">Ir</a>
                     {% endif %}
                 </p>
             {% else %}

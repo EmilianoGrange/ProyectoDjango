@@ -58,7 +58,7 @@ def update_product(req, id):
             product.save()
 
             return render(req, 'create_product.html', {'message': 'Producto actualizado correctamente'})
-    
+
     product = Product.objects.get(id=id)
     prod_form = ProductForm(initial= {
         'title': product.title,

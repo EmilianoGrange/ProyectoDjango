@@ -51,9 +51,29 @@
                                     <!-- Details -->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center"><a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'detailedSupplier' supp.id %}">Otros datos</a></div>
-                                        <form action="{% url 'deleteSupplier' supp.id %}" method="post" class="text-center">{% csrf_token %}
-                                            <button class="btn btn-del btn-danger mt-auto mb-1" id={{supp.id}} type="submit">Eliminar</button>
-                                        </form>
+                                        {% comment %} {% if admin %} {% endcomment %}
+                                            <!-- Button trigger modal -->
+                                            <div class="text-center"><button type="button" class="btn btn-del btn-danger mt-auto mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button></div>
+                                        {% comment %} {% endif %} {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title fs-5" id="exampleModalLabel">Confirmar</h3>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body"><h4>Se va a eliminar el proveedor!</h4></div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <form action="{% url 'deleteSupplier' supp.id %}" method="post" class="text-center">{% csrf_token %}
+                                                <button class="btn btn-del btn-danger mt-auto mb-1" id={{supp.id}} type="submit">Eliminar!</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

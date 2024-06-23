@@ -38,7 +38,9 @@
 
                                 <h6>E-mail: {{employee.email}}</h6>
 
-                                <a class="btn btn-warning mt-auto mb-1" href="{% url 'updateEmployee' employee.id %}">Modificar</a>
+                                {% comment %} {% if admin %} {% endcomment %}
+                                    <a class="btn btn-warning mt-auto mb-1" href="{% url 'updateEmployee' employee.id %}">Modificar</a>
+                                {% comment %} {% endif %} {% endcomment %}
 
                                 <a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'employees' %}">Volver</a>
                             </div>

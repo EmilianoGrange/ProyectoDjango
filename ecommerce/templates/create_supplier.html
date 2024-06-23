@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Productos - Ecommerce</title>
+        <title>Nuevo Proveedor - Ecommerce</title>
         <link rel="icon" type="image/x-icon" href="{% static '/assets/favicon.ico' %}"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="{% static '/css/styles.css' %}" rel="stylesheet" />
@@ -27,6 +27,8 @@
 
                 <h4>{{ message }}</h4>
 
+                <a class="btn btn-secondary mt-auto mb-1" href="{% url 'suppliers' %}">Continuar</a>
+
                 {% else %}
 
                     <section class="py-5 container px-4 px-lg-5 mt-5">
@@ -39,6 +41,8 @@
                                         {{supp_form.as_p}}
     
                                         <input class="btn btn-primary" type="submit" value="Nuevo Proveedor"/>
+
+                                        <a class="btn btn-secondary mt-auto mb-1" href="{% url 'suppliers' %}">Cancelar</a>
                                     </div>
                                 </form>
                             </div>

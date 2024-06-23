@@ -34,7 +34,15 @@
                                     <!-- Product name-->
                                     <h3 class="fw-bolder">{{product.title}}</h3>
                                     <!-- Product price-->
-                                    ${{product.price}}
+                                    <h4>${{product.price}}</h4>
+
+                                    <h5>Categoria: {{product.category}}</h5>
+
+                                    <h6>Stock: {{product.stock}}</h6>
+
+                                    <a class="btn btn-warning mt-auto mb-1" href="{% url 'updateProduct' product.id %}">Modificar</a>
+
+                                    <a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'products' %}">Volver</a>
                                 </div>
                             </div>
                     </div>

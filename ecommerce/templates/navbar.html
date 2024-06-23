@@ -9,8 +9,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'products' %}">Todos</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Populares</a></li>
-                        <li><a class="dropdown-item" href="#!">Nuevos Ingresos</a></li>
+                        <li><a class="dropdown-item" href="{% url 'orderedProducts' %}">Precio menor a mayor</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'employees' %}">Empleados</a></li>

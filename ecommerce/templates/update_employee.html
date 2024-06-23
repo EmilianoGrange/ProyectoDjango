@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Nuevo Producto - Ecommerce</title>
+        <title>Actualizar Empleado - Ecommerce</title>
         <link rel="icon" type="image/x-icon" href="{% static '/assets/favicon.ico' %}"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="{% static '/css/styles.css' %}" rel="stylesheet" />
@@ -27,22 +27,20 @@
 
                 <h4>{{ message }}</h4>
 
-                <a class="btn btn-secondary mt-auto mb-1" href="{% url 'products' %}">Continuar</a>
-
                 {% else %}
 
                     <section class="py-5 container px-4 px-lg-5 mt-5">
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                             <div class="col mb-5">
-                                <h3>Agregar Producto</h3>
+                                <h4>Modificar Empleado</h4>
 
-                                <form action="{% url 'createProduct' %}" method="post">{% csrf_token %}
+                                <form action="{% url 'updateEmployee' employee.id %}" method="post">{% csrf_token %}
                                     <div class="form-group">
-                                        {{prod_form.as_p}}
+                                        {{emp_form.as_p}}
 
-                                        <input class="btn btn-primary" type="submit" value="Agregar Producto" />
+                                        <input class="btn btn-primary" type="submit" value="Actualizar"/>
 
-                                        <a class="btn btn-secondary mt-auto mb-1" href="{% url 'products' %}">Cancelar</a>
+                                        <a class="btn btn-secondary mt-auto mb-1" href="{% url 'detailedEmployee' employee.id %}">Cancelar</a>
                                     </div>
                                 </form>
                             </div>

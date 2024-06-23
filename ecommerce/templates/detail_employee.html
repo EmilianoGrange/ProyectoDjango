@@ -33,6 +33,14 @@
                                 <h3 class="fw-bolder">{{employee.last_name}}, {{employee.name}}</h3>
                                 <!-- Position -->
                                 <h4>{{employee.position}}</h4>
+
+                                <h5>Salario: ${{employee.salary}}</h5>
+
+                                <h6>E-mail: {{employee.email}}</h6>
+
+                                <a class="btn btn-warning mt-auto mb-1" href="{% url 'updateEmployee' employee.id %}">Modificar</a>
+
+                                <a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'employees' %}">Volver</a>
                             </div>
                         </div>
                     </div>

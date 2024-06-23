@@ -12,6 +12,10 @@ def show_products(req):
     products = Product.objects.all()
     return render(req, 'products.html', {'products': products})
 
+def ordered_products(req):
+    products = Product.objects.order_by('price')
+    return render(req, 'products.html', {'products': products})
+
 def detailed_product(req, id):
     product = Product.objects.get(id=id)
 
@@ -39,6 +43,31 @@ def search_product(req):
             return render(req, 'search_product.html', {'product': 'No se encontraron coincidencias'})
 
     return render(req, 'search_product.html', {})
+
+def update_product(req, id):
+    if req.method == 'POST':
+        prod_form = ProductForm(req.POST)
+        if prod_form.is_valid():
+            data = prod_form.cleaned_data
+            product = Product.objects.get(id=id)
+            product.title = data['title']
+            product.description = data['description']
+            product.category = data['category']
+            product.price = data['price']
+            product.stock = data['stock']
+            product.save()
+
+            return render(req, 'create_product.html', {'message': 'Producto actualizado correctamente'})
+    
+    product = Product.objects.get(id=id)
+    prod_form = ProductForm(initial= {
+        'title': product.title,
+        'description': product.description,
+        'category': product.category,
+        'price': product.price,
+        'stock': product.stock
+    })
+    return render(req, 'update_product.html', {'prod_form': prod_form, 'product': product})
 
 def del_product(req, id):
 
@@ -83,6 +112,37 @@ def search_employee(req):
 
     return render(req, 'search_employee.html', {})
 
+def update_employee(req, id):
+    if req.method == 'POST':
+        emp_form = EmployeeForm(req.POST)
+        if emp_form.is_valid():
+            data = emp_form.cleaned_data
+            employee = Employee.objects.get(id=id)
+            employee.name = data['name']
+            employee.last_name = data['last_name']
+            employee.birthday = data['birthday']
+            employee.position = data['position']
+            employee.salary = data['salary']
+            employee.start_date = data['start_date']
+            employee.phone_number = data['phone_number']
+            employee.email = data['email']
+            employee.save()
+
+            return render(req, 'update_employee.html', {'message': 'Colaborador actualizado correctamente'})
+    
+    employee = Employee.objects.get(id=id)
+    emp_form = EmployeeForm(initial= {
+            'name': employee.name,
+            'last_name': employee.last_name,
+            'birthday': employee.birthday,
+            'position': employee.position,
+            'salary': employee.salary,
+            'start_date': employee.start_date,
+            'phone_number': employee.phone_number,
+            'email': employee.email
+    })
+    return render(req, 'update_employee.html', {'emp_form': emp_form, 'employee': employee})
+
 def del_employee(req, id):
 
     if req.method == 'POST':
@@ -125,6 +185,31 @@ def search_supplier(req):
             return render(req, 'search_supplier.html', {'supplier': 'No se encontraron coincidencias'})
 
     return render(req, 'search_supplier.html', {})
+
+def update_supplier(req, id):
+    if req.method == 'POST':
+        supp_form = SupplierForm(req.POST)
+        if supp_form.is_valid():
+            data = supp_form.cleaned_data
+            supplier = Supplier.objects.get(id=id)
+            supplier.name = data['name']
+            supplier.last_name = data['last_name']
+            supplier.phone_number = data['phone_number']
+            supplier.email = data['email']
+            supplier.save()
+
+            return render(req, 'update_supplier.html', {'message': 'Proveedor actualizado correctamente'})
+    
+    supplier = Supplier.objects.get(id=id)
+
+    supp_form = SupplierForm(initial= {
+        'name': supplier.name,
+        'last_name': supplier.last_name,
+        'phone_number': supplier.phone_number,
+        'email': supplier.email
+    })
+
+    return render(req, 'update_supplier.html', {'supp_form': supp_form, 'supplier': supplier})
 
 def del_supplier(req, id):
 

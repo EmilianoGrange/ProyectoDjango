@@ -32,7 +32,13 @@
                                 <!-- Name -->
                                 <h3 class="fw-bolder">{{supplier.last_name}}, {{supplier.name}}</h3>
                                 <!-- Contact mail address -->
-                                <h4>{{supplier.email}}</h4>
+                                <h4>E-mail: {{supplier.email}}</h4>
+
+                                <h5>Telefono: {{supplier.phone_number}}</h5>
+
+                                <a class="btn btn-warning mt-auto mb-1" href="{% url 'updateSupplier' supplier.id %}">Modificar</a>
+
+                                <a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'suppliers' %}">Volver</a>
                             </div>
                         </div>
                     </div>

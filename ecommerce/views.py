@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from .models import Supplier, Product, Employee
-from .forms import SupplierForm, ProductForm, EmployeeForm
+from .forms import SupplierForm, ProductForm, EmployeeForm, UserEditForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm #UserChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
@@ -12,7 +12,6 @@ def home_template(req):
     return render(req, 'home.html', {})
 
 def show_products(req):
-
     products = Product.objects.all()
     return render(req, 'products.html', {'products': products})
 
@@ -23,7 +22,6 @@ def ordered_products(req):
 @login_required
 def detailed_product(req, id):
     product = Product.objects.get(id=id)
-
     return render(req, 'detail_product.html', {'product': product})
 
 @staff_member_required(login_url='/ecommerce/staff_auth')
@@ -34,7 +32,6 @@ def create_product(req):
             data = prod_form.cleaned_data
             new_product = Product(**data)
             new_product.save()
-
             return render(req, 'create_product.html', {'message': 'Producto creado con exito'})
 
     prod_form = ProductForm()
@@ -63,7 +60,6 @@ def update_product(req, id):
             product.price = data['price']
             product.stock = data['stock']
             product.save()
-
             return render(req, 'create_product.html', {'message': 'Producto actualizado correctamente'})
 
     product = Product.objects.get(id=id)
@@ -78,36 +74,30 @@ def update_product(req, id):
 
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def del_product(req, id):
-
     if req.method == 'POST':
         product = Product.objects.get(id=id)
         product.delete()
-
         products = Product.objects.all()
         return render(req, 'products.html', {'products': products, 'product': product})
 
 @login_required
 def show_employees(req):
-
     employees = Employee.objects.all()
     return render(req, 'employees.html', {'employees': employees})
 
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def detailed_employee(req, id):
     employee = Employee.objects.get(id=id)
-
     return render(req, 'detail_employee.html', {'employee': employee})
 
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def create_employee(req):
-
     if req.method == 'POST':
         emp_form = EmployeeForm(req.POST)
         if emp_form.is_valid():
             data = emp_form.cleaned_data
             new_employee = Employee(**data)
             new_employee.save()
-
             return render(req, 'create_employee.html', {'message': 'Empleado creado con exito'})
 
     empl_form = EmployeeForm()
@@ -140,7 +130,6 @@ def update_employee(req, id):
             employee.phone_number = data['phone_number']
             employee.email = data['email']
             employee.save()
-
             return render(req, 'update_employee.html', {'message': 'Colaborador actualizado correctamente'})
     
     employee = Employee.objects.get(id=id)
@@ -158,36 +147,30 @@ def update_employee(req, id):
 
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def del_employee(req, id):
-
     if req.method == 'POST':
         employee = Employee.objects.get(id=id)
         employee.delete()
-
         employees = Employee.objects.all()
         return render(req, 'employees.html', {'employees': employees, 'employee': employee})
 
 @login_required
 def show_suppliers(req):
-
     suppliers = Supplier.objects.all()
     return render(req, 'suppliers.html', {'suppliers': suppliers})
 
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def detailed_supplier(req, id):
     supplier = Supplier.objects.get(id=id)
-
     return render(req, 'detail_supplier.html', {'supplier': supplier})
 
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def create_supplier(req):
-
     if req.method == 'POST':
         sup_form = SupplierForm(req.POST)
         if sup_form.is_valid():
             data = sup_form.cleaned_data
             new_supplier = Supplier(**data)
             new_supplier.save()
-
             return render(req, 'create_supplier.html', {'message': 'Proveedor creado con exito'})
 
     supp_form = SupplierForm()
@@ -216,32 +199,40 @@ def update_supplier(req, id):
             supplier.phone_number = data['phone_number']
             supplier.email = data['email']
             supplier.save()
-
             return render(req, 'update_supplier.html', {'message': 'Proveedor actualizado correctamente'})
     
     supplier = Supplier.objects.get(id=id)
-
     supp_form = SupplierForm(initial= {
         'name': supplier.name,
         'last_name': supplier.last_name,
         'phone_number': supplier.phone_number,
         'email': supplier.email
     })
-
     return render(req, 'update_supplier.html', {'supp_form': supp_form, 'supplier': supplier})
 
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def del_supplier(req, id):
-
     if req.method == 'POST':
         supplier = Supplier.objects.get(id=id)
         supplier.delete()
-
         suppliers = Supplier.objects.all()
         return render(req, 'suppliers.html', {'suppliers': suppliers, 'supplier': supplier})
 
+def register(req):
+    if req.method == 'POST':
+        reg_form = UserCreationForm(req.POST)
+        if reg_form.is_valid():
+            data = reg_form.cleaned_data
+            user = data['username']
+            reg_form.save()
+            return render(req, 'register.html', {'message': f'Usuario {user} creado con exito!'})
+        else:
+            return render(req, 'register.html', {'message': 'Datos invalidos'})
+
+    reg_form = UserCreationForm()
+    return render(req, 'register.html', {'reg_form': reg_form})
+
 def login_view(req):
-    
     if req.method == 'POST':
         auth_form = AuthenticationForm(req, data=req.POST)
         if auth_form.is_valid():
@@ -259,21 +250,6 @@ def login_view(req):
 
     auth_form = AuthenticationForm()
     return render(req, 'login.html', {'auth_form': auth_form})
-
-def register(req):
-
-    if req.method == 'POST':
-        reg_form = UserCreationForm(req.POST)
-        if reg_form.is_valid():
-            data = reg_form.cleaned_data
-            user = data['username']
-            reg_form.save()
-            return render(req, 'register.html', {'message': f'Usuario {user} creado con exito!'})
-        else:
-            return render(req, 'register.html', {'message': 'Datos invalidos'})
-
-    reg_form = UserCreationForm()
-    return render(req, 'register.html', {'reg_form': reg_form})
 
 def staff_auth(req):
     if req.method == 'POST':
@@ -293,3 +269,22 @@ def staff_auth(req):
 
     auth_form = AuthenticationForm()
     return render(req, 'staff_auth.html', {'auth_form': auth_form})
+
+@login_required
+def edit_profile(req):
+    user = req.user
+    if req.method == 'POST':
+        profile_form = UserEditForm(req.POST, instance=user)
+        if profile_form.is_valid():
+            data = profile_form.cleaned_data
+            user.first_name = data['first_name']
+            user.last_name = data['last_name']
+            user.email = data['email']
+            user.set_password(data['psw1'])
+            user.save()
+            return render(req, 'profile.html', {'message': 'Perfil actualizado correctamente'})
+        else:
+            return render(req, 'profile.html', {'profile_form': profile_form})
+
+    profile_form = UserEditForm(instance=user)
+    return render(req, 'profile.html', {'profile_form': profile_form})

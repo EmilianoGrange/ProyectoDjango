@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login Staff - Ecommerce</title>
+        <title>Editar Perfil - Ecommerce</title>
         <link rel="icon" type="image/x-icon" href="{% static '/assets/favicon.ico' %}"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link href="{% static '/css/styles.css' %}" rel="stylesheet" />
@@ -26,15 +26,13 @@
                 <h3>{{ message }}</h3>
 
                 {% else %}
-                    <form action="{% url 'staffAuth' %}" method="post">{% csrf_token %}
+                    <form action="{% url 'editProfile' %}" method="post">{% csrf_token %}
                         <div class="form-group">
-                            {{auth_form.as_p}}
+                            {{profile_form.as_p}}
 
-                            <input class="btn btn-primary" type="submit" value="Iniciar Sesión"/>
+                            <input class="btn btn-warning" type="submit" value="Guardar cambios"/>
                         </div>
                     </form>
-
-                    <p>Debes ser <b>miembro del staff</b> para acceder</p>
             {% endif %}
 
         {% endblock dinamicContent %}

@@ -18,6 +18,7 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <form action="{% url 'logout' %}" method="post">{% csrf_token %}
+                            <a class="btn btn-primary" href="{% url 'editProfile' %}">Actualizar Perfil</a>
                             <input class="btn btn-secondary" type="submit" value="Cerrar sesion">
                         </form>
                     </li>

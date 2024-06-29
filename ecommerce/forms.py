@@ -14,6 +14,7 @@ class ProductForm(forms.Form):
     category = forms.CharField()
     price = forms.DecimalField()
     stock = forms.IntegerField()
+    thumbnail = forms.ImageField()
 
 class EmployeeForm(forms.Form):
     name = forms.CharField()

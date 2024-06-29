@@ -27,12 +27,14 @@ def detailed_product(req, id):
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def create_product(req):
     if req.method == 'POST':
-        prod_form = ProductForm(req.POST)
+        prod_form = ProductForm(req.POST, req.FILES)
         if prod_form.is_valid():
             data = prod_form.cleaned_data
             new_product = Product(**data)
             new_product.save()
             return render(req, 'create_product.html', {'message': 'Producto creado con exito'})
+        else:
+            return render(req, 'create_product.html', {'message': 'Datos invalidos'})
 
     prod_form = ProductForm()
     return render(req, 'create_product.html', {'prod_form': prod_form})
@@ -50,7 +52,7 @@ def search_product(req):
 @staff_member_required(login_url='/ecommerce/staff_auth')
 def update_product(req, id):
     if req.method == 'POST':
-        prod_form = ProductForm(req.POST)
+        prod_form = ProductForm(req.POST, req.FILES)
         if prod_form.is_valid():
             data = prod_form.cleaned_data
             product = Product.objects.get(id=id)
@@ -59,8 +61,11 @@ def update_product(req, id):
             product.category = data['category']
             product.price = data['price']
             product.stock = data['stock']
+            product.thumbnail = data['thumbnail']
             product.save()
-            return render(req, 'create_product.html', {'message': 'Producto actualizado correctamente'})
+            return render(req, 'update_product.html', {'message': 'Producto actualizado correctamente'})
+        else:
+            return render(req, 'update_product.html', {'message': 'Datos invalidos'})
 
     product = Product.objects.get(id=id)
     prod_form = ProductForm(initial= {
@@ -68,7 +73,8 @@ def update_product(req, id):
         'description': product.description,
         'category': product.category,
         'price': product.price,
-        'stock': product.stock
+        'stock': product.stock,
+        'thumbnail': product.thumbnail
     })
     return render(req, 'update_product.html', {'prod_form': prod_form, 'product': product})
 

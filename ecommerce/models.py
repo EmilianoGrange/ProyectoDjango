@@ -1,5 +1,3 @@
-#import os
-#from django.conf import settings
 from django.db import models
 
 #def images_path():
@@ -27,7 +25,7 @@ class Product(models.Model):
     category = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=9, decimal_places=2)
     stock = models.IntegerField()
-    #thumbnail = models.FilePathField(path=images_path)
+    thumbnail = models.ImageField(upload_to='products', blank=True, null=True)
     #supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     #supplier = models.ManyToManyField(Supplier)
 

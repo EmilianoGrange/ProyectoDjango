@@ -34,7 +34,7 @@
                             <div class="col mb-5">
                                 <h3>Modificar Producto</h3>
 
-                                <form action="{% url 'updateProduct' product.id %}" method="post">{% csrf_token %}
+                                <form action="{% url 'updateProduct' product.id %}" enctype="multipart/form-data" method="post">{% csrf_token %}
                                     <div class="form-group">
                                         {{prod_form.as_p}}
 

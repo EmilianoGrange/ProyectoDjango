@@ -36,9 +36,9 @@
 
                                 <h5>Telefono: {{supplier.phone_number}}</h5>
 
-                                {% comment %} {% if admin %} {% endcomment %}
+                                {% if user.is_superuser %}
                                     <a class="btn btn-warning mt-auto mb-1" href="{% url 'updateSupplier' supplier.id %}">Modificar</a>
-                                {% comment %} {% endif %} {% endcomment %}
+                                {% endif %}
 
                                 <a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'suppliers' %}">Volver</a>
                             </div>

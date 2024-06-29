@@ -40,9 +40,9 @@
 
                                     <h6>Stock: {{product.stock}}</h6>
 
-                                    {% comment %} {% if admin %} {% endcomment %}
+                                    {% if user.is_superuser %}
                                         <a class="btn btn-warning mt-auto mb-1" href="{% url 'updateProduct' product.id %}">Modificar</a>
-                                    {% comment %} {% endif %} {% endcomment %}
+                                    {% endif %}
 
                                     <a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'products' %}">Volver</a>
                                 </div>

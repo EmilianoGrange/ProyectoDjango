@@ -1,8 +1,13 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView
 from ecommerce.views import *
 
 urlpatterns = [
     path('', home_template, name='home'),
+    path('register/', register, name='register'),
+    path('login/', login_view, name='login'),
+    path('staff_auth', staff_auth, name='staff_auth'),
+    path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('products/', show_products, name='products'),
     path('ordered_products/', ordered_products, name='orderedProducts'),
     path('detail_product/<int:id>', detailed_product, name='detailedProduct'),

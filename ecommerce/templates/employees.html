@@ -25,9 +25,9 @@
 
         {% block dinamicContent %}
 
-            {% comment %} {% if admin %} {% endcomment %}
+            {% if user.is_superuser %}
                 <a class="btn btn-primary" href="{% url 'createEmployee' %}">Agregar Empleado</a>
-            {% comment %} {% endif %} {% endcomment %}
+            {% endif %}
 
             <a class="btn btn-secondary" href="{% url 'searchEmployee' %}">Busqueda 🔎</a>
 
@@ -51,10 +51,10 @@
                                     <!-- Details -->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center"><a class="btn btn-outline-dark mt-auto mb-1" href="{% url 'detailedEmployee' emp.id %}">Otros datos</a></div>
-                                        {% comment %} {% if admin %} {% endcomment %}
+                                        {% if user.is_superuser %}
                                             <!-- Button trigger modal -->
                                             <div class="text-center"><button type="button" class="btn btn-del btn-danger mt-auto mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button></div>
-                                        {% comment %} {% endif %} {% endcomment %}
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

@@ -14,7 +14,17 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'employees' %}">Empleados</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'suppliers' %}">Proveedores</a></li>
-                <li class="nav-item"><a class="btn btn-primary" href="#signup">Ingresar</a></li>
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post">{% csrf_token %}
+                            <input class="btn btn-secondary" type="submit" value="Cerrar sesion">
+                        </form>
+                    </li>
+
+                    {% else %}
+                        <li class="nav-item"><a class="btn btn-primary" href="{% url 'login' %}">Ingresar</a></li>
+                {% endif %}
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="submit">

@@ -2,25 +2,18 @@
 
 `python manage.py runserver`
 
-Se creo una app ecommerce
+Se creó una app ecommerce
 
 *{localhost:puerto}/ecommerce/*
 
-que renderiza el template 'home'
+que renderiza el template 'home'. A pesar del nombre, que es la idea final del proyecto, es en realidad una app de gestión para un negocio.
 
-En el navbar se incluyeron las referencias a 6 secciones navegables:
+En el navbar se incluyeron las referencias a 5 secciones navegables:
 - El inicio (home)
-- Productos (Todos) (*{localhost:puerto}/ecommerce/products/*)
+- Productos, todos (*{localhost:puerto}/ecommerce/products/*) u ordenados por precio (*{localhost:puerto}/ecommerce/ordered_products/*)
 - Empleados (*{localhost:puerto}/ecommerce/employees/*)
 - Proveedores (*{localhost:puerto}/ecommerce/suppliers/*)
-- Busqueda (*{localhost:puerto}/ecommerce/search-product/*)
-- Ingresar (no funcional)
-Las secciones de **Productos**, **Empleados** y **Proveedores**, proveen formularios segun los respectivos modelos para agregar un nuevo elemento en la base de datos. La sección de **Busqueda**, permite obtener un producto por su nombre.
+- Ingresar (*{localhost:puerto}/ecommerce/login/*)
+La sección de **login** también permite el registro de nuevos usuarios (*{localhost:puerto}/ecommerce/register/*). Algunas secciones solo son accesibles para usuarios logueados y/o para el superusuario (*user*: **milog**, *password*: **log12345**), particularmente para modificar información. Las secciones de **Productos**, **Empleados** y **Proveedores**, proveen entonces formularios según los respectivos modelos para agregar un nuevo elemento a la base de datos, actualizar los existentes, o eliminarlos. La sección de **Busqueda**, permite obtener un producto, un empleado o un proveedor por sus nombres.
+Tanto al crear, como al modificar productos, es posible agregar una imagen de los mismos. Por último, para los usuarios logueados es posible acceder a "Actualizar Perfil", para modificar sus datos (nombre y apellido, email, y contraseña).
 Para la herencia html se utiliza `include`, con definición de algunos componentes (header, navbar, footer).
-
-## TODO:
-- Popular la BD
-- Resolver la seccion Ingresar
-- Notificaciones cuando se agregan elementos a la BD
-- La busqueda (con `get()`) solo permite buscar 1 producto por su nombre. Desarrollarla para los demás modelos, y con diferentes filtros.
-- Resolver código comentado (imagenes en los productos, validaciones en los formularios, etc)
